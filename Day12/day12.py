@@ -60,6 +60,7 @@ def path(grid,visited,startrow,startcol,endrow,endcol):
             return distance
         for i in range(temp_len):
             queue.pop(0)
+    return len(grid) * len(grid[0])
 
 
 def feweststeps(file):
@@ -95,13 +96,7 @@ def feweststeps(file):
                 if(grid[i][j]=='a'):
                     count +=1
                     steps_arr.append(path(grid,visited,i,j,endingrow,endingcol))
-        temp = []
-        for i in steps_arr:
-            if(i is None):
-                pass
-            else:
-                temp.append(i)
-        return min(temp)
+        return min(steps_arr)
 
         
 
