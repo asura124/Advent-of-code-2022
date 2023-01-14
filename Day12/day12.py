@@ -60,6 +60,50 @@ def path(grid,visited,startrow,startcol,endrow,endcol):
             return distance
         for i in range(temp_len):
             queue.pop(0)
+
+
+def feweststeps(file):
+    visited = {}
+    grid = [[]]
+    steps = 0
+    with open(file) as f:
+        content = f.readlines()
+        for line in content:
+            line = line
+            for l in line:
+                if(l=='\n'):
+                    grid.append([])
+                else:
+                    grid[-1].append(l)
+        startingrow = 0
+        startingcol = 0
+        endingrow = 0
+        endingcol = 0
+        steps_arr = []
+        grid.pop()
+        for i in range(len(grid)):
+            for j in range(len(grid[i])):
+                if(grid[i][j]=='S'):
+                    grid[i][j]='a'
+                elif(grid[i][j]=='E'):
+                    endingrow=i
+                    endingcol = j
+                    grid[i][j] = 'z'
+        count = 0
+        for i in range(len(grid)):
+            for j in range(len(grid[i])):
+                if(grid[i][j]=='a'):
+                    count +=1
+                    steps_arr.append(path(grid,visited,i,j,endingrow,endingcol))
+        temp = []
+        for i in steps_arr:
+            if(i is None):
+                pass
+            else:
+                temp.append(i)
+        return min(temp)
+
         
 
 print(shortest("shortest.txt"))
+print(feweststeps("shortest.txt"))
